@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2018 2:33:17 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Angsuran" table="ANGSURAN" schema="DB_PEGADAIAN" optimistic-lock="version">
+        <id name="idAngsuran" type="string">
+            <column name="ID_ANGSURAN" length="5" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="customer" class="model.Customer" fetch="select">
+            <column name="ID_CUSTOMER" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="gadai" class="model.Gadai" fetch="select">
+            <column name="ID_GADAI" length="5" not-null="true" />
+        </many-to-one>
+        <property name="tanggalAngsuran" type="date">
+            <column name="TANGGAL_ANGSURAN" length="7" />
+        </property>
+        <property name="jumlahAngsuran" type="java.lang.Long">
+            <column name="JUMLAH_ANGSURAN" precision="15" scale="0" />
+        </property>
+        <property name="denda" type="java.lang.Long">
+            <column name="DENDA" precision="15" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

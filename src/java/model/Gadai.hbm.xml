@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2018 2:33:17 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Gadai" table="GADAI" schema="DB_PEGADAIAN" optimistic-lock="version">
+        <id name="idGadai" type="string">
+            <column name="ID_GADAI" length="5" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="barang" class="model.Barang" fetch="select">
+            <column name="ID_BARANG" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="customer" class="model.Customer" fetch="select">
+            <column name="ID_CUSTOMER" length="5" not-null="true" />
+        </many-to-one>
+        <property name="jumlahPinjaman" type="java.lang.Long">
+            <column name="JUMLAH_PINJAMAN" precision="15" scale="0" />
+        </property>
+        <property name="tanggalPinjaman" type="date">
+            <column name="TANGGAL_PINJAMAN" length="7" />
+        </property>
+        <property name="jatuhTempo" type="date">
+            <column name="JATUH_TEMPO" length="7" />
+        </property>
+        <property name="sisa" type="java.lang.Long">
+            <column name="SISA" precision="15" scale="0" />
+        </property>
+        <set name="angsurans" table="ANGSURAN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_GADAI" length="5" not-null="true" />
+            </key>
+            <one-to-many class="model.Angsuran" />
+        </set>
+    </class>
+</hibernate-mapping>

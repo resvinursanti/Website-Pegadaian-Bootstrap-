@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2018 2:33:17 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Barang" table="BARANG" schema="DB_PEGADAIAN" optimistic-lock="version">
+        <id name="idBarang" type="string">
+            <column name="ID_BARANG" length="5" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="jenisBarang" class="model.JenisBarang" fetch="select">
+            <column name="ID_JENIS_BARANG" length="5" not-null="true" />
+        </many-to-one>
+        <property name="namaBarang" type="string">
+            <column name="NAMA_BARANG" length="55" />
+        </property>
+        <property name="kualitas" type="string">
+            <column name="KUALITAS" length="1" />
+        </property>
+        <set name="gadais" table="GADAI" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_BARANG" length="5" not-null="true" />
+            </key>
+            <one-to-many class="model.Gadai" />
+        </set>
+    </class>
+</hibernate-mapping>
